@@ -1,0 +1,33 @@
+.searchBoxtwo{
+    /* width: 215px;
+    height: 19px; */
+    top: 27px;
+    left: 456px;
+    gap: 0px;
+    opacity: 0px;
+    font-family: Lato;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 19.2px;
+    letter-spacing: 0.20000000298023224px;
+    text-align: left;
+    /* background: #121212; */
+
+}
+.searchBox{
+
+    border-radius:8px 0px 0px 8px;
+    border:1px solid black;
+    height:100%;
+    width:502px;
+    padding:0px;
+    padding-left:20px;
+    font: Lato;
+    color: #121212;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 19.2px;
+    letter-spacing: 0.20000000298023224px;
+    text-align: left;
+}
+
