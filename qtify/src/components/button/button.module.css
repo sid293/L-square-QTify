@@ -1,7 +1,7 @@
 .button{
-    width: Hug (170px)px;
+    /* width: Hug (170px)px; */
     background-color: black;
-    height: Hug (47px)px;
+    /* height: Hug (47px)px; */
     top: 13px;
     left: 1238px;
     padding: 10px 16px 10px 16px;
@@ -10,7 +10,7 @@
     border: 1px;
     opacity: 0px;
     color:var(--primaryColor);
-    font: Poppins;
+    /* font: Poppins; */
     cursor:pointer; 
     /* font-size: 18px; */
     font-weight: 600;
