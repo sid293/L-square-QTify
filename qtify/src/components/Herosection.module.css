@@ -1,0 +1,22 @@
+.outerdiv{
+    /* border:3px solid blue; */
+    width:100vw;
+    background-color: black;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.text{
+    /* border:3px solid red; */
+    font-family: Poppins;
+    font-size: 32px;
+    font-weight: 600;
+    line-height: 48px;
+    text-align: center;
+
+}
+
+.headphone{
+    /* border:3px solid lightblue; */
+}
