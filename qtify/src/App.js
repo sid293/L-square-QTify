@@ -2,6 +2,7 @@ import logo from './logo.svg';
 import './App.css';
 import Navbar from './components/navbar/Navbar';
 import Appbar from './components/Appbar';
+import Herosection from './components/Herosection';
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
         </a> */}
         {/* <Navbar/> */}
         <Appbar/>
+        <Herosection/>
         {/* <div>soemthing</div> */}
       </header>
     </div>
