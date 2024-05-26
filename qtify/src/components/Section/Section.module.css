@@ -1,0 +1,96 @@
+.wrapper{
+    width:100vw;
+    /* border:3px solid blue; */
+    background-color: black;
+}
+
+.albumsList{
+    display:flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    gap:24px;
+}
+
+.header{
+    width:100vw;
+    display:flex;
+    justify-content: space-between;
+    /* padding:18px; */
+}
+
+.heaad{
+    /* font-family: Poppins; */
+    font-size: 20px;
+    font-weight: 600;
+    line-height: 30px;
+    padding:18px;
+    text-align: left;
+
+}
+
+
+.buton{
+    /* font-family: Poppins; */
+    cursor:pointer;
+    font-size: 20px;
+    padding:18px;
+    font-weight: 600;
+    color:var(--primaryColor);
+    line-height: 30px;
+    text-align: right;
+    border:none;
+    background-color: black;
+}
+
+
+/* .swiperbuttonnext{
+    color:red;
+    border:2px solid red;
+    height:100px;
+    width:100px;
+}
+
+.swiperbuttonprevious{
+    color:red;
+    border:2px solid red;
+    height:100px;
+    width:100px;
+} */
+
+.swiperButtonPrev,
+.swiperButtonNext {
+  color: white;
+  background-color:var(--primaryColor) ;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  right: 10px; /* Ensure it's positioned correctly */
+}
+
+.swiperButtonPrev {
+  /* color: #fff;
+  background-color: rgba(0, 0, 0, 0.5);
+  border-radius: 50%;
+  width: 40px;
+  height: 40px; */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  left: 10px; /* Ensure it's positioned correctly */
+}
+
+.swiperButtonHover:hover {
+  background-color: rgba(0, 0, 0, 0.8);
+}
+
+.swiperContainer{
+    position: relative;
+}
+
+.swiperButtonDisabled{
+    opacity:0;
+    pointer-event:none;
+}

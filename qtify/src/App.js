@@ -3,6 +3,8 @@ import './App.css';
 import Navbar from './components/navbar/Navbar';
 import Appbar from './components/Appbar';
 import Herosection from './components/Herosection';
+import Card from './components/Card/Card';
+import Section from './components/Section/Section';
 
 function App() {
   return (
@@ -20,9 +22,10 @@ function App() {
         >
           Learn React
         </a> */}
-        {/* <Navbar/> */}
-        <Appbar/>
+        {/* <Navbar/> */} <Appbar/>
         <Herosection/>
+        {/* <Card follows={1000} image={"#"} bottomtext={"bottom text"} /> */}
+        <Section/>
         {/* <div>soemthing</div> */}
       </header>
     </div>
