@@ -25,7 +25,8 @@ function App() {
         {/* <Navbar/> */} <Appbar/>
         <Herosection/>
         {/* <Card follows={1000} image={"#"} bottomtext={"bottom text"} /> */}
-        <Section/>
+        <Section albumName={"Top Albums"}/>
+        <Section albumName={"New Albums"}/>
         {/* <div>soemthing</div> */}
       </header>
     </div>
