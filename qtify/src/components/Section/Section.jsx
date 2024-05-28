@@ -160,7 +160,7 @@ export default function Section({albumName}){
                         {albumsLst.map((album)=>{
                         let conditionalProps = albumName === "Songs"? {likes:album.likes}:{follows:album.follows, Songs:album.songs.length}; 
                         return <SwiperSlide ><Card {...conditionalProps} image={album.image} bottomtext={album.title}/></SwiperSlide>})}
-                        <div style={{color:'white',width:"32px",height:"32px",'--swiper-navigation-size':"22px"}} className={`${style.swiperButtonNext} swiper-button-next ${style.swiperButtonHover}`} >i</div>
+                        <div style={{color:'white',width:"32px",height:"32px",'--swiper-navigation-size':"22px"}} className={`${style.swiperButtonNext} swiper-button-next ${style.swiperButtonHover}`} ></div>
                         <div style={{color:'white',width:"32px",height:"32px",'--swiper-navigation-size':"22px"}} className={`${style.swiperButtonPrev} swiper-button-prev ${style.swiperButtonHover}`} />
                     </Swiper>
                 </div>
