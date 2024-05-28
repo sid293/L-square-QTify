@@ -27,6 +27,7 @@ function App() {
         {/* <Card follows={1000} image={"#"} bottomtext={"bottom text"} /> */}
         <Section albumName={"Top Albums"}/>
         <Section albumName={"New Albums"}/>
+        <Section albumName={"Songs"}/>
         {/* <div>soemthing</div> */}
       </header>
     </div>

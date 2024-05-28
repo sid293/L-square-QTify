@@ -1,116 +1,5 @@
-// import style from './Section.module.css';
-// // import Button from '@mui/material/Button';
-// import fetchSongs from './../../apis/fetchApis'; 
-// import { useEffect,useState } from 'react';
-// import Card from "./../Card/Card";
-// import {Swiper, SwiperSlide} from 'swiper/react';
-// import 'swiper/css';
-// import 'swiper/css/navigation';
-// import {Navigation, Pagination, Mousewheel, Keyboard} from 'swiper/modules';
-// // import 'swiper/swiper-bundle.css';
-
-// export default function Section(){
-//     let [songsList, changeSongsList] = useState([]);
-//     let [albumDisplay, changeAlbumDisplay] = useState("Collapse");
-
-//     let getSongs = async()=>{
-//         let songs = await fetchSongs();
-//         changeSongsList(songs);
-//         // console.log("songs list is  ",songsList);
-//     }
-
-//     let setAlbumDisplay = ()=>{
-//         if(albumDisplay == "Collapse"){
-//             changeAlbumDisplay("Show all");
-//         }else{
-//             changeAlbumDisplay("Collapse");
-//         }
-//     }
-
-//     // useEffect(()=>{
-//     //     console.log("songs list is  ",songsList);
-//     // },[songsList]);
-
-//     useEffect(()=>{
-//         getSongs();
-//         if(albumDisplay !== "Collapse"){
-//             const swiper = document.querySelector('.swiper-container').swiper;
-//             swiper.navigation.init();
-//             swiper.navigation.update();
-//         }
-//     },[])
-
-//     return(
-//         <div class={style.wrapper}>
-//             <div class={style.header}>
-//                 <div class={style.heaad}>Top Albums</div>
-//                 <button onClick={setAlbumDisplay} class={style.buton}>{albumDisplay}</button>
-//             </div>
-//             <div>
-//                 {albumDisplay == "Collapse"?
-//                <div class={style.albumsList}>
-//                     {/* <Card follows={100} image="img" bottomtext='bottomtxt'/> */}
-//                     {songsList.map((album)=><Card follows={album.follows} image={album.image} bottomtext={album.title}/>)}
-//                 </div> 
-//                 :
-//                 <div class={style.swiperContainer} style={{border:"2px solid yellow"}}>
-//                     <Swiper 
-//                         class="swiper-container"
-//                         // navigation={true}
-//                         // navigation={{
-//                         //     nextEl:`.${style.swiperbuttonnext}`,
-//                         //     prevEl:`.${style.swiperbuttonprevious}`,
-//                         // }} 
-//                         navigation={{
-//                             nextEl: `.${style.swiperButtonNext}`,
-//                             prevEl: `.${style.swiperButtonPrev}`,
-//                         }}
-//                         keyboard={true} 
-//                         cssMode={true}
-//                         mousewheel={true}
-//                         modules={[Navigation,Keyboard,Mousewheel]} 
-//                         className='mySwiper' 
-//                         spaceBetween={18}
-//                         slidesPerView={3}
-//                         breakpoints={{
-//                             320: {
-//                             slidesPerView: 2,
-//                             spaceBetween: 10
-//                             },
-//                             // when window width is >= 480px
-//                             480: {
-//                             slidesPerView: 3,
-//                             spaceBetween: 15
-//                             },
-//                             // when window width is >= 640px
-//                             640: {
-//                             slidesPerView: 4,
-//                             spaceBetween: 20
-//                             },
-//                             // when window width is >= 1024px
-//                             1024: {
-//                             slidesPerView: 5,
-//                             spaceBetween: 25
-//                             }
-//                         }}
-//                     >
-//                         {songsList.map((album)=><SwiperSlide><Card follows={album.follows} image={album.image} bottomtext={album.title}/></SwiperSlide>)}
-//                         {/* <div className={`${style.swiperButtonNext} `} />
-//                         <div className={`${style.swiperButtonPrevious} `} /> */}
-//                         <div style={{color:'white',width:"50px",height:"50px"}} className={`${style.swiperButtonNext} swiper-button-next ${style.swiperButtonHover}`} />
-//                         <div style={{color:'white',width:"50px",height:"50px"}} className={`${style.swiperButtonPrev} swiper-button-prev ${style.swiperButtonHover}`} />
-//                     </Swiper>
-//                 </div>
-//                 }
-//             </div>
-//         </div>
-//     )
-// }
-
-
 import style from './Section.module.css';
-// import Button from '@mui/material/Button';
-import {fetchTopAlbums, fetchNewAlbums} from './../../apis/fetchApis'; 
+import fetchIt from './../../apis/fetchApis'; 
 import { useEffect,useState } from 'react';
 import Card from "./../Card/Card";
 import {Swiper, SwiperSlide} from 'swiper/react';
@@ -119,10 +8,17 @@ import 'swiper/css/navigation';
 import {Navigation, Mousewheel, Keyboard} from 'swiper/modules';
 // import 'swiper/swiper-bundle.css';
 
+import Box from '@mui/material/Box';
+import Tab from '@mui/material/Tab';
+import TabContext from '@mui/lab/TabContext';
+import TabList from '@mui/lab/TabList';
+import TabPanel from '@mui/lab/TabPanel';
+
+
 export default function Section({albumName}){
     let [albumsLst, changeAlbumsList] = useState([]);
     let [albumDisplay, changeAlbumDisplay] = useState("Show all");
-
+    let [value, changeValue] = useState("All");
 
     let setAlbumDisplay = ()=>{
         //Switch between collaps view and showall view
@@ -133,31 +29,48 @@ export default function Section({albumName}){
         }
     }
 
+    let handleChange = async (event, value)=>{
+        // console.log("handlechange event value ",event,value);
+        let allSongs = await fetchIt("songs");
+        if(value !== "All"){
+            allSongs = allSongs.filter((album)=> {
+                return album.genre.label === value});
+            // console.log("filtered albums list is ",filteredAlbumsLst);
+        }
+        changeAlbumsList(allSongs);
+        // console.log("value is ",value);
+        changeValue(value);
+    }
+
     // useEffect(()=>{
     //     console.log("songs list is  ",songsList);
     // },[songsList]);
 
     useEffect(()=>{
-        console.log("running useeffect");
+        // console.log("running useeffect");
         let getAlbums = async()=>{
             //Based on albumName change section settings
             // console.log("running get albums");
             let albums = [];
-            console.log("albumName ",albumName);
+            // console.log("albumName ",albumName);
             if(albumName === "Top Albums"){
-                albums = await fetchTopAlbums();
-                console.log("fetchtopalbums albums list is  ",albums);
+                // albums = await fetchTopAlbums();
+                albums = await fetchIt('top');
+                // console.log("fetchtopalbums albums list is  ",albums);
                 changeAlbumDisplay("Collapse");
                 changeAlbumsList(albums);
             }
             if(albumName === "New Albums"){
-                albums = await fetchNewAlbums();
-                console.log("fetch new albums albums list is  ",albums);
+                // albums = await fetchNewAlbums();
+                albums = await fetchIt('new');
+                // console.log("fetch new albums albums list is  ",albums);
                 changeAlbumsList(albums);
             }
-            // console.log("getalbums complete");
-            // debugger;
-            // changeAlbumsList(albums);
+            if(albumName === "Songs"){
+                albums = await fetchIt('songs');
+                // console.log("fetch songs ",albums);
+                changeAlbumsList(albums);
+            }
         }
         getAlbums();
         if(albumDisplay !== "Collapse"){
@@ -170,24 +83,48 @@ export default function Section({albumName}){
     return(
         <div class={style.wrapper}>
             <div class={style.header}>
-                <div class={style.heaad}>{albumName}</div>
+                {albumName !== "Songs" && 
+                    <div class={style.heaad}>{albumName}</div>
+                }
                 <button onClick={setAlbumDisplay} class={style.buton}>{albumDisplay}</button>
             </div>
+            {albumName === "Songs" && 
+                <div>
+                    <Box sx={{ width: '100%', typography: 'body1' }}>
+                        <TabContext value={value}>
+                            <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
+                            <TabList onChange={handleChange} aria-label="lab API tabs example" textColor="white" sx={{
+                                '& .MuiTabs-indicator': {
+                                    backgroundColor: 'var(--primaryColor)',
+                                }
+                                }}>
+                                <Tab label="All" value="All" />
+                                <Tab label="Rock" value="Rock" />
+                                <Tab label="Pop" value="Pop" />
+                                <Tab label="Jazz" value="Jazz" />
+                                <Tab label="Blues" value="Blues" />
+                            </TabList>
+                            </Box>
+                            {/* <TabPanel value="All">All</TabPanel>
+                            <TabPanel value="Rock">Rock</TabPanel>
+                            <TabPanel value="Pop">Pop</TabPanel>
+                            <TabPanel value="Jazz">Jazz</TabPanel>
+                            <TabPanel value="Blues">Blues</TabPanel> */}
+                        </TabContext>
+                    </Box>
+                </div>
+            }
             <div>
                 {albumDisplay === "Collapse"?
                <div class={style.albumsList}>
-                    {/* <Card follows={100} image="img" bottomtext='bottomtxt'/> */}
-                    {albumsLst.map((album)=><Card key={album.title} follows={album.follows} image={album.image} bottomtext={album.title}/>)}
+                    {albumsLst.map((album)=>{
+                   let conditionalProps = albumName === "Songs"? {likes:album.likes}:{follows:album.follows}; 
+                    return <Card {...conditionalProps} image={album.image} bottomtext={album.title}/>})}
                 </div> 
                 :
                 <div class={style.swiperContainer} style={{border:"2px solid yellow"}}>
                     <Swiper 
                         class="swiper-container"
-                        // navigation={true}
-                        // navigation={{
-                        //     nextEl:`.${style.swiperbuttonnext}`,
-                        //     prevEl:`.${style.swiperbuttonprevious}`,
-                        // }} 
                         navigation={{
                             nextEl: `.${style.swiperButtonNext}`,
                             prevEl: `.${style.swiperButtonPrev}`,
@@ -221,11 +158,11 @@ export default function Section({albumName}){
                             }
                         }}
                     >
-                        {albumsLst.map((album)=><SwiperSlide key={album.title}><Card follows={album.follows} image={album.image} bottomtext={album.title}/></SwiperSlide>)}
-                        {/* <div className={`${style.swiperButtonNext} `} />
-                        <div className={`${style.swiperButtonPrevious} `} /> */}
-                        <div style={{color:'white',width:"50px",height:"50px"}} className={`${style.swiperButtonNext} swiper-button-next ${style.swiperButtonHover}`} />
-                        <div style={{color:'white',width:"50px",height:"50px"}} className={`${style.swiperButtonPrev} swiper-button-prev ${style.swiperButtonHover}`} />
+                        {albumsLst.map((album)=>{
+                        let conditionalProps = albumName === "Songs"? {likes:album.likes}:{follows:album.follows}; 
+                        return <SwiperSlide ><Card {...conditionalProps} image={album.image} bottomtext={album.title}/></SwiperSlide>})}
+                        <div style={{color:'white',width:"32px",height:"32px",'--swiper-navigation-size':"22px"}} className={`${style.swiperButtonNext} swiper-button-next ${style.swiperButtonHover}`} >i</div>
+                        <div style={{color:'white',width:"32px",height:"32px",'--swiper-navigation-size':"22px"}} className={`${style.swiperButtonPrev} swiper-button-prev ${style.swiperButtonHover}`} />
                     </Swiper>
                 </div>
                 }

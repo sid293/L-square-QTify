@@ -2,8 +2,11 @@ import Chip from '@mui/material/Chip';
 // import Card from '@mui/material/Card';
 import style from './Card.module.css';
 
-export default function Card({follows,image,bottomtext = "New English Songs"}){
+export default function Card({follows=[],image,bottomtext = "New English Songs",likes=[]}){
     let followLabel = `${follows} Follows`;
+    if(follows.length === 0){
+        followLabel = `${likes} Likes`;
+    }
     
     return(
         <div class={style.wrapperdiv}>
