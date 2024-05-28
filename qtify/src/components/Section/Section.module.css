@@ -6,6 +6,9 @@
     width:100vw;
     /* border:3px solid blue; */
     background-color: black;
+    /* padding-left:24px;
+    padding-right:24px; */
+    /* padding:200px; */
 }
 
 .albumsList{
@@ -13,6 +16,8 @@
     justify-content: space-around;
     flex-wrap: wrap;
     gap:24px;
+    padding-left:24px;
+    padding-right:24px;
 }
 
 .header{
@@ -20,6 +25,8 @@
     display:flex;
     justify-content: space-between;
     /* padding:18px; */
+    /* padding-left:24px;
+    padding-right:24px; */
 }
 
 .heaad{
@@ -93,6 +100,9 @@
 
 .swiperContainer{
     position: relative;
+    /* padding:24px; */
+    padding-left:24px;
+    padding-right:24px;
 }
 
 .swiperButtonDisabled{
@@ -104,4 +114,9 @@
 .primaryColor{
     color:var(--primaryColor);
     background-color: var(--primaryColor);
+}
+
+.filters{
+    padding-left:24px;
+    padding-right:24px;
 }

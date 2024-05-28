@@ -12,7 +12,7 @@ import Box from '@mui/material/Box';
 import Tab from '@mui/material/Tab';
 import TabContext from '@mui/lab/TabContext';
 import TabList from '@mui/lab/TabList';
-import TabPanel from '@mui/lab/TabPanel';
+// import TabPanel from '@mui/lab/TabPanel';
 
 
 export default function Section({albumName}){
@@ -38,7 +38,6 @@ export default function Section({albumName}){
             // console.log("filtered albums list is ",filteredAlbumsLst);
         }
         changeAlbumsList(allSongs);
-        // console.log("value is ",value);
         changeValue(value);
     }
 
@@ -83,13 +82,13 @@ export default function Section({albumName}){
     return(
         <div class={style.wrapper}>
             <div class={style.header}>
+                <div class={style.heaad}>{albumName}</div>
                 {albumName !== "Songs" && 
-                    <div class={style.heaad}>{albumName}</div>
+                    <button onClick={setAlbumDisplay} class={style.buton}>{albumDisplay}</button>
                 }
-                <button onClick={setAlbumDisplay} class={style.buton}>{albumDisplay}</button>
             </div>
             {albumName === "Songs" && 
-                <div>
+                <div class={style.filters}>
                     <Box sx={{ width: '100%', typography: 'body1' }}>
                         <TabContext value={value}>
                             <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
@@ -122,7 +121,7 @@ export default function Section({albumName}){
                     return <Card {...conditionalProps} image={album.image} bottomtext={album.title}/>})}
                 </div> 
                 :
-                <div class={style.swiperContainer} style={{border:"2px solid yellow"}}>
+                <div class={style.swiperContainer}>
                     <Swiper 
                         class="swiper-container"
                         navigation={{
